@@ -1,0 +1,32 @@
+{
+  "name": "Online LaTeX (Codespaces)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        "latex-workshop.latex.tools": [
+          {
+            "name": "tectonic",
+            "command": "tectonic",
+            "args": ["-X", "compile", "%DOC%"]
+          }
+        ],
+        "latex-workshop.latex.recipes": [
+          { "name": "tectonic", "tools": ["tectonic"] }
+        ],
+        "latex-workshop.view.pdf.viewer": "tab"
+      }
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends tectonic latexmk biber && sudo apt-get clean",
+  "forwardPorts": [],
+  "remoteUser": "vscode"
+}
